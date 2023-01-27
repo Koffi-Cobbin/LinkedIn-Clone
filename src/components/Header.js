@@ -23,6 +23,23 @@ const Header = (props) => {
                     </SearchIcon> 
                 </Search>
 
+                <User className="user-sm">
+                    <a>
+                        {props.user && props.user.photoURL ? (
+                            <img src={props.user.photoURL} alt="" />
+                        ) : (
+                        <img src="/images/user.svg" alt="" />
+                        )}
+                        <span>
+                            Me<img src="/images/down-icon.svg" alt="" />
+                        </span>
+                    </a>
+
+                    <SignOut onClick={() => props.signOut()}>
+                        <a>Sign Out</a>
+                    </SignOut>
+                </User>
+
                 <Nav>
                     <NavListWrap>
                         <NavList className="active">
@@ -139,6 +156,12 @@ const Search = styled.div`
             height: 34px;
             border-color: #dce6f1;
             vertical-align: text-top;
+            @media (max-width: 768px) {
+            max-width: 150px;
+        }
+        }
+        @media (max-width: 768px) {
+            max-width: 200px;
         }
     }
 `;
@@ -174,7 +197,7 @@ const Nav = styled.nav`
 
 const NavListWrap = styled.ul`
     display: flex;
-    flex-wrap: nowrap;
+    overflow-x: auto;
     list-style-type: none;
 
     .active {
@@ -188,6 +211,16 @@ const NavListWrap = styled.ul`
             transition: transform 0.2s ease-in-out;
             width: 100%;
             border-color: rgba(0, 0, 0, 0.9);
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        & > ${User} {
+            display: none;
         }
     }
 `;
@@ -234,16 +267,26 @@ const SignOut = styled.div`
     top: 45px;
     background: white;
     border-radius: 0 0 5px 5px;
-    width: 100px;
+    /* width: 100px; */
     height: 40px;
     font-size: 16px;
     transition-duration: 167ms;
     text-align: center;
     display: none;
+    cursor: pointer;
 `;
 
 
 const User = styled(NavList)`
+    &.user-sm {
+        padding: 0;
+        display: none;
+        margin-right: 30px;
+        a {
+            padding: 0;
+        }
+    }
+
     a > img {
         width: 24px;
         height: 24px;
@@ -260,6 +303,34 @@ const User = styled(NavList)`
             align-items: center;
             display: flex;
             justify-content: center;
+        }
+    }
+
+    @media (min-width: 768px) {
+        &.user-sm {
+            display: flex;
+
+            ${SignOut} {
+                padding: 1px;
+                left: 80%;
+                a {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        &.user-sm {
+            display: flex;
+
+            ${SignOut} {
+                padding: 1px;
+                left: 70%;
+                a {
+                    padding: 0;
+                }
+            }
         }
     }
 `;

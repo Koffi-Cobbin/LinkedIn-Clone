@@ -54,7 +54,7 @@ const Nav = styled.div`
     flex-wrap: nowrap;
 
     & > a {
-        width: 135px;
+        width: 100px; //135
         height: 35px;
         @media(max-width: 768px){
             padding: 0 5px;
@@ -76,6 +76,11 @@ const Join = styled.a`
         color: rgba(0, 0, 0, 0.9);
         text-decoration: none;
     }
+
+    @media(max-width: 768px){
+            padding: 5px 6px;
+            margin-right: 2px;
+        }
 `;
 
 
@@ -96,6 +101,11 @@ const SignIn = styled.a`
         color: #0a66c2;
         text-decoration: none;
     }
+
+    @media(max-width: 768px){
+            padding: 5px 10px;
+            margin-left: 5px;
+        }
 `;
 
 
